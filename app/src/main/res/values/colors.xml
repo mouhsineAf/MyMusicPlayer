@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#181B2C</color>
-    <color name="colorPrimaryDark">#00C16E</color>
+    <color name="colorPrimaryDark">#D9519D</color>
     <color name="colorAccent">#80ED99</color>
 
 
@@ -14,9 +14,8 @@
     <color name="grey_40">#999999</color>
     <color name="grey_60">#666666</color>
     <color name="grey_80">#37474F</color>
-    <color name="grey">#757171</color>
-
-
+    <color name="grey">#63666E</color>
+    <color name="color_bg_search">#292E4B</color>
 
 
 </resources>

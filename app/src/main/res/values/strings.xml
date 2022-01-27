@@ -3,4 +3,8 @@
     <string name="text_nav_home">Home</string>
     <string name="text_nav_songs">Songs</string>
     <string name="text_nav_settings">Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_search">Search album song</string>
+    <string name="text_hot_recommended">Hot Recommended</string>
 </resources>
