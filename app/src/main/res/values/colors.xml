@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#181B2C</color>
     <color name="colorPrimaryDark">#D9519D</color>
-    <color name="colorAccent">#80ED99</color>
+    <color name="colorAccent">#10121D</color>
 
 
     <color name="black">#FF000000</color>
@@ -17,5 +17,7 @@
     <color name="grey">#63666E</color>
     <color name="color_bg_search">#292E4B</color>
 
+    <color name="color_bg_top_nav_header">#08FFFFFF</color>
+    <color name="color_text_view_All">#ED8770</color>
 
 </resources>

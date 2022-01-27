@@ -8,11 +8,10 @@
         android:id="@+id/btn_drawer"
         android:layout_width="50dp"
         android:layout_height="40dp"
-        android:layout_marginStart="10dp"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_drawer"
+        android:layout_marginStart="10dp"
         android:padding="10dp"
-        />
+        android:src="@drawable/ic_drawer" />
 
     <RelativeLayout
         android:layout_width="match_parent"

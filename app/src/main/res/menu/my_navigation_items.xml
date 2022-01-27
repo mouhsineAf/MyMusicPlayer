@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/nav_themes"
+        android:icon="@drawable/ic_paint"
+        android:title="@string/text_nav_themes" />
+    <item
+        android:id="@+id/nav_ringtone_cutter"
+        android:icon="@drawable/ic_cutter"
+        android:title="@string/text_nav_ringtone_cutter" />
+    <item
+        android:id="@+id/nav_hidden_folders"
+        android:icon="@drawable/ic_folders"
+        android:title="@string/text_nav_hidden_folders" />
+
+
+
+
+</menu>

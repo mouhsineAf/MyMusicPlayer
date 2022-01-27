@@ -6,10 +6,14 @@
         <entry key="..\:/Mouhsine/Projects Android Studio/Music Player/MyMusicPlayer/app/src/main/res/drawable/bg_search.xml" value="0.3402777777777778" />
         <entry key="..\:/Mouhsine/Projects Android Studio/Music Player/MyMusicPlayer/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Mouhsine/Projects Android Studio/Music Player/MyMusicPlayer/app/src/main/res/layout/activity_splash.xml" value="0.35260416666666666" />
-        <entry key="..\:/Mouhsine/Projects Android Studio/Music Player/MyMusicPlayer/app/src/main/res/layout/card_hot_recommended.xml" value="0.32592592592592595" />
+        <entry key="..\:/Mouhsine/Projects Android Studio/Music Player/MyMusicPlayer/app/src/main/res/layout/card_hot_recommended.xml" value="0.25" />
+        <entry key="..\:/Mouhsine/Projects Android Studio/Music Player/MyMusicPlayer/app/src/main/res/layout/card_playlist.xml" value="0.32592592592592595" />
+        <entry key="..\:/Mouhsine/Projects Android Studio/Music Player/MyMusicPlayer/app/src/main/res/layout/card_recently_played.xml" value="0.67" />
         <entry key="..\:/Mouhsine/Projects Android Studio/Music Player/MyMusicPlayer/app/src/main/res/layout/costem_toolbar.xml" value="0.36666666666666664" />
-        <entry key="..\:/Mouhsine/Projects Android Studio/Music Player/MyMusicPlayer/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Mouhsine/Projects Android Studio/Music Player/MyMusicPlayer/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Mouhsine/Projects Android Studio/Music Player/MyMusicPlayer/app/src/main/res/layout/nav_header.xml" value="0.32592592592592595" />
         <entry key="..\:/Mouhsine/Projects Android Studio/Music Player/MyMusicPlayer/app/src/main/res/menu/bottom_navigation.xml" value="0.36666666666666664" />
+        <entry key="..\:/Mouhsine/Projects Android Studio/Music Player/MyMusicPlayer/app/src/main/res/menu/my_navigation_items.xml" value="0.32592592592592595" />
       </map>
     </option>
   </component>
