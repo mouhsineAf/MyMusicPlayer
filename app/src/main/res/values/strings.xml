@@ -16,4 +16,9 @@
     <string name="text_recently_played">Recently Played</string>
     <string name="text_view_all">View All</string>
     <string name="text_play_list">Playlist</string>
+
+    <string name="recently_added">Recently Added</string>
+    <string name="favorites">Favorites</string>
+    <string name="top_played">Top Played</string>
+    <string name="recently_played">Recently Played</string>
 </resources>

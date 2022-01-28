@@ -1,14 +1,23 @@
 package com.my.musicplayer.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.my.musicplayer.R;
+import com.my.musicplayer.adapter.PlaylistAdapter;
+import com.my.musicplayer.async.AsyncFetchPlaylist;
+import com.my.musicplayer.model.Playlist;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,8 +35,27 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    ArrayList<Playlist> playlistArrayList;
+    RecyclerView recyclerViewPlaylist;
+    PlaylistAdapter playlistAdapter;
+    LinearLayoutManager horizontalLayoutManagerPlaylist;
+
+
+
+
+
+
     public HomeFragment() {
         // Required empty public constructor
+    }
+
+    Activity activity;
+
+    @Override
+    public void onAttach(Activity a) {
+        super.onAttach(a);
+        activity = a;
+
     }
 
     /**
@@ -61,6 +89,43 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        recyclerViewPlaylist = view.findViewById(R.id.playlist_recyclerview);
+
+
+        buildTipsRecycleView();
+        loadPlaylist();
+
+        return view;
+    }
+
+
+    private void buildTipsRecycleView(){
+        recyclerViewPlaylist.setHasFixedSize(true);
+        horizontalLayoutManagerPlaylist = new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewPlaylist.setLayoutManager(horizontalLayoutManagerPlaylist);
+        playlistAdapter = new PlaylistAdapter(activity);
+        recyclerViewPlaylist.setAdapter(playlistAdapter);
+        playlistAdapter.setOnItemClickListener(new PlaylistAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, ArrayList<Playlist> playlists) {
+
+            }
+        });
+
+    }
+
+    private void loadPlaylist(){
+        AsyncFetchPlaylist asyncFetchPlaylist = new AsyncFetchPlaylist(getContext(), new AsyncFetchPlaylist.CallbackPlaylist() {
+            @Override
+            public void processData(ArrayList<Playlist> hashMaps) {
+                playlistArrayList = new ArrayList<>();
+                Log.e(TAG, "playlistArrayList: " + hashMaps.toString());
+                playlistArrayList.addAll(hashMaps);
+                playlistAdapter.addPlaylist(playlistArrayList);
+            }
+        });
+        asyncFetchPlaylist.execute();
     }
 }
