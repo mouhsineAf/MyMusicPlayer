@@ -94,14 +94,14 @@ public class HomeFragment extends Fragment {
         recyclerViewPlaylist = view.findViewById(R.id.playlist_recyclerview);
 
 
-        buildTipsRecycleView();
+        buildPlaylistRecycleView();
         loadPlaylist();
 
         return view;
     }
 
 
-    private void buildTipsRecycleView(){
+    private void buildPlaylistRecycleView(){
         recyclerViewPlaylist.setHasFixedSize(true);
         horizontalLayoutManagerPlaylist = new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewPlaylist.setLayoutManager(horizontalLayoutManagerPlaylist);

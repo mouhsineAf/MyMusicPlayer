@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".fragment.AllSongsFragment">
+
+    <RelativeLayout
+        android:id="@+id/layout_filter"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+        <ImageView
+            android:id="@+id/image_filter_songs"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_filter"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            app:tint="#ED8770" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/color_bg_top_nav_header"/>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/all_songs_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_filter"
+        android:layout_marginTop="10dp"
+        tools:listitem="@layout/card_songs_played" />
+
+</RelativeLayout>
