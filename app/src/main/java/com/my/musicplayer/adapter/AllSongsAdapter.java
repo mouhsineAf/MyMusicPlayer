@@ -29,6 +29,7 @@ public class AllSongsAdapter extends RecyclerView.Adapter<AllSongsAdapter.AllSon
     }
 
     public void addPlaylist(ArrayList<Song> songs){
+        songArrayList.clear();
         songArrayList.addAll(songs);
         notifyDataSetChanged();
     }

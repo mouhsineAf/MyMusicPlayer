@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.my.musicplayer.adapter.AllSongsAdapter;
 import com.my.musicplayer.adapter.PlaylistAdapter;
 import com.my.musicplayer.model.Playlist;
 import com.my.musicplayer.model.Song;
+import com.my.musicplayer.utils.Common;
 import com.my.musicplayer.utils.DataHelper;
 
 import java.util.ArrayList;
@@ -34,7 +36,7 @@ import io.reactivex.schedulers.Schedulers;
  * create an instance of this fragment.
  */
 public class AllSongsFragment extends Fragment {
-
+    private static final String TAG = "AllSongsFragment";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -47,6 +49,7 @@ public class AllSongsFragment extends Fragment {
 
 
     private CompositeDisposable mCompositeDisposable;
+    private Common common;
 
     AllSongsAdapter allSongsAdapter;
     RecyclerView recyclerViewAllSong;
@@ -102,6 +105,7 @@ public class AllSongsFragment extends Fragment {
 
 
         mCompositeDisposable = new CompositeDisposable();
+  //      common = (Common) context.getApplicationContext();
 
 
         buildAllSongsRecycleView();
@@ -123,7 +127,7 @@ public class AllSongsFragment extends Fragment {
 
     private void loadSongs() {
         songArrayList = new ArrayList<>();
-        mCompositeDisposable.add(Observable.fromCallable(() -> DataHelper.getTracksForSelection("SONGS", ""))
+        mCompositeDisposable.add(Observable.fromCallable(() -> DataHelper.getTracksForSelection(context, "SONGS", ""))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<ArrayList<Song>>() {
@@ -134,11 +138,13 @@ public class AllSongsFragment extends Fragment {
 
                     @Override
                     public void onError(Throwable e) {
+                        Log.e(TAG, "onError: " + e.toString());
 
                     }
 
                     @Override
                     public void onNext(ArrayList<Song> data) {
+                        Log.e(TAG, "data.size(): " + data.size());
                         songArrayList.clear();
                         songArrayList.addAll(data);
                         allSongsAdapter.addPlaylist(data);
