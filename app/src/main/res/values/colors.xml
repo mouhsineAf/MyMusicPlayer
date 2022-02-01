@@ -19,5 +19,6 @@
 
     <color name="color_bg_top_nav_header">#08FFFFFF</color>
     <color name="color_text_view_All">#ED8770</color>
+    <color name="colorBgTextPlaylist">#80000000</color>
 
 </resources>

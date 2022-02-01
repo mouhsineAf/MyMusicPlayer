@@ -1,14 +1,27 @@
 package com.my.musicplayer.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.my.musicplayer.R;
+import com.my.musicplayer.activity.MainActivity;
+import com.my.musicplayer.adapter.MyPlaylistAdapter;
+import com.my.musicplayer.adapter.PlaylistAdapter;
+import com.my.musicplayer.async.AsyncFetchPlaylist;
+import com.my.musicplayer.model.Playlist;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,7 +29,7 @@ import com.my.musicplayer.R;
  * create an instance of this fragment.
  */
 public class PlaylistFragment extends Fragment {
-
+    private static final String TAG = "PlaylistFragment";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -26,8 +39,25 @@ public class PlaylistFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    ArrayList<Playlist> playlistArrayList;
+    RecyclerView recyclerViewPlaylist;
+    MyPlaylistAdapter myPlaylistAdapter;
+    LinearLayoutManager horizontalLayoutManagerPlaylist;
+
+
+
     public PlaylistFragment() {
         // Required empty public constructor
+    }
+
+    Context context;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity){
+            this.context = context;
+        }
     }
 
     /**
@@ -61,6 +91,45 @@ public class PlaylistFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_playlist, container, false);
+        View view = inflater.inflate(R.layout.fragment_playlist, container, false);
+
+
+        recyclerViewPlaylist = view.findViewById(R.id.my_playlist_recyclerview);
+
+
+        buildPlaylistRecycleView();
+        loadPlaylist();
+
+
+        return view;
+    }
+
+
+    private void buildPlaylistRecycleView(){
+        recyclerViewPlaylist.setHasFixedSize(true);
+        horizontalLayoutManagerPlaylist = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewPlaylist.setLayoutManager(horizontalLayoutManagerPlaylist);
+        myPlaylistAdapter = new MyPlaylistAdapter(context);
+        recyclerViewPlaylist.setAdapter(myPlaylistAdapter);
+        myPlaylistAdapter.setOnItemClickListener(new MyPlaylistAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, ArrayList<Playlist> playlists) {
+
+            }
+        });
+
+    }
+
+    private void loadPlaylist(){
+        AsyncFetchPlaylist asyncFetchPlaylist = new AsyncFetchPlaylist(getContext(), new AsyncFetchPlaylist.CallbackPlaylist() {
+            @Override
+            public void processData(ArrayList<Playlist> hashMaps) {
+                playlistArrayList = new ArrayList<>();
+                Log.e(TAG, "playlistArrayList: " + hashMaps.toString());
+                playlistArrayList.addAll(hashMaps);
+                myPlaylistAdapter.addPlaylist(playlistArrayList);
+            }
+        });
+        asyncFetchPlaylist.execute();
     }
 }

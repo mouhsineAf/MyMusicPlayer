@@ -109,7 +109,7 @@ public class AllSongsFragment extends Fragment {
 
 
         buildAllSongsRecycleView();
-        loadSongs();
+       // loadSongs();
 
         return view;
     }
@@ -120,7 +120,12 @@ public class AllSongsFragment extends Fragment {
         recyclerViewAllSong.setLayoutManager(new LinearLayoutManager(context));
         allSongsAdapter = new AllSongsAdapter(context);
         recyclerViewAllSong.setAdapter(allSongsAdapter);
+        allSongsAdapter.setOnItemClickListener(new AllSongsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, ArrayList<Song> song) {
 
+            }
+        });
 
     }
 
@@ -152,6 +157,11 @@ public class AllSongsFragment extends Fragment {
                 }));
     }
 
+    @Override
+    public void onResume() {
+        loadSongs();
+        super.onResume();
+    }
 
     @Override
     public void onDetach() {

@@ -28,5 +28,10 @@
 
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="text_my_play_list">My Playlist</string>
+    <string name="text_my_top_tracks">My Top Tracks</string>
+    <string name="text_latest_added">Latest Added</string>
+    <string name="text_history">History</string>
+    <string name="text_favorites">Favorites</string>
 
 </resources>

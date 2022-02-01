@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.my.musicplayer.R;
 import com.my.musicplayer.model.Playlist;
 import com.my.musicplayer.model.Song;
+import com.my.musicplayer.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -35,7 +36,7 @@ public class AllSongsAdapter extends RecyclerView.Adapter<AllSongsAdapter.AllSon
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int position, ArrayList<Playlist> playlists);
+        void onItemClick(int position, ArrayList<Song> song);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -61,13 +62,18 @@ public class AllSongsAdapter extends RecyclerView.Adapter<AllSongsAdapter.AllSon
 
         holder.songName.setText(song.getSongTitle());
         holder.songArtist.setText(song.getSongArtist());
-        holder.songTime.setText(String.valueOf(song.getSongDuration()));
+        holder.songTime.setText(Utils.convertToMintsSecs((int) song.getSongDuration()));
+
+        holder.itemView.setOnClickListener(view -> {
+            mListener.onItemClick(position, songArrayList);
+        });
     }
 
     @Override
     public int getItemCount() {
         return songArrayList.size();
     }
+
 
     public static class AllSongsHolder extends RecyclerView.ViewHolder{
         public ImageView songIcon;

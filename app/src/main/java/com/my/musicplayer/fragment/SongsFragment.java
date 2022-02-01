@@ -22,6 +22,8 @@ import com.my.musicplayer.R;
 import com.my.musicplayer.adapter.SongsFragmentPagerAdapter;
 import com.my.musicplayer.utils.Shared;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SongsFragment#newInstance} factory method to
@@ -42,6 +44,8 @@ public class SongsFragment extends Fragment {
     TabLayout tabLayoutSongs;
     ViewPager viewPagerSongs;
     SongsFragmentPagerAdapter songsFragmentPagerAdapter;
+    private ArrayList<Fragment> mFragments;
+
 
     public SongsFragment() {
         // Required empty public constructor
@@ -145,4 +149,6 @@ public class SongsFragment extends Fragment {
         }
 
     }
+
+
 }

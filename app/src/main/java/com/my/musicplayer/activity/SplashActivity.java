@@ -48,7 +48,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                open();
+               // open();
             }
         },3000);
 
@@ -63,7 +63,7 @@ public class SplashActivity extends AppCompatActivity {
                 buildLibrary();
             }
         }else{
-            buildLibrary();
+          //  buildLibrary();
         }
     }
 

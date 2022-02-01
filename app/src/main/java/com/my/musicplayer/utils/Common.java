@@ -6,6 +6,7 @@ import androidx.multidex.MultiDexApplication;
 public class Common extends MultiDexApplication{
 
     private static Common mContext;
+    private static Common appInstance;
 
 
 

@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.my.musicplayer.fragment.AlbumFargment;
 import com.my.musicplayer.fragment.AllSongsFragment;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SongsFragmentPagerAdapter extends FragmentPagerAdapter {
+public class SongsFragmentPagerAdapter extends FragmentStatePagerAdapter {
     private Map<Integer, String> mFragmentTags;
     private FragmentManager mFragmentManager;
     private String mPageTile[];
