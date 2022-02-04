@@ -17,10 +17,9 @@ import android.view.ViewGroup;
 import com.my.musicplayer.R;
 import com.my.musicplayer.activity.MainActivity;
 import com.my.musicplayer.adapter.AlbumAdapter;
-import com.my.musicplayer.adapter.ArtistAdapter;
+import com.my.musicplayer.adapter.MyPlaylistAdapter;
 import com.my.musicplayer.model.Album;
-import com.my.musicplayer.model.Artist;
-import com.my.musicplayer.utils.DataBaseHelper;
+import com.my.musicplayer.model.Playlist;
 import com.my.musicplayer.utils.DataHelper;
 
 import java.util.ArrayList;
@@ -33,11 +32,11 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ArtistFragment#newInstance} factory method to
+ * Use the {@link AlbumFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ArtistFragment extends Fragment {
-    private static final String TAG = "ArtistFragment";
+public class AlbumFragment extends Fragment {
+    private static final String TAG = "AlbumFragment";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -47,14 +46,13 @@ public class ArtistFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
     Context context;
-    ArrayList<Artist> artistArrayList;
-    RecyclerView recyclerViewArtist;
-    ArtistAdapter artistAdapter;
-    RecyclerView.LayoutManager layoutManagerArtist;
+    ArrayList<Album> albumArrayList;
+    RecyclerView recyclerViewAlbum;
+    AlbumAdapter albumAdapter;
+    RecyclerView.LayoutManager layoutManagerAlbum;
     CompositeDisposable mCompositeDisposable;
-
-
 
 
     @Override
@@ -65,9 +63,10 @@ public class ArtistFragment extends Fragment {
         }
     }
 
-    public ArtistFragment() {
+    public AlbumFragment() {
         // Required empty public constructor
     }
+
 
     /**
      * Use this factory method to create a new instance of
@@ -75,11 +74,11 @@ public class ArtistFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ArtistFragment.
+     * @return A new instance of fragment AlbumFargment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ArtistFragment newInstance(String param1, String param2) {
-        ArtistFragment fragment = new ArtistFragment();
+    public static AlbumFragment newInstance(String param1, String param2) {
+        AlbumFragment fragment = new AlbumFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -100,44 +99,49 @@ public class ArtistFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_artist, container, false);
+        View view = inflater.inflate(R.layout.fragment_album_fargment, container, false);
 
-        recyclerViewArtist = view.findViewById(R.id.artist_recyclerview);
+        recyclerViewAlbum = view.findViewById(R.id.album_recyclerview);
 
 
         mCompositeDisposable = new CompositeDisposable();
 
+
         buildAlbumRecycleView();
-        loadArtists();
+        loadAlbums();
+
 
         return view;
     }
 
     private void buildAlbumRecycleView(){
-        recyclerViewArtist.setHasFixedSize(true);
-        recyclerViewArtist.setLayoutManager(new LinearLayoutManager(context));
-        artistAdapter = new ArtistAdapter(context);
-        recyclerViewArtist.setAdapter(artistAdapter);
+        recyclerViewAlbum.setHasFixedSize(true);
+        layoutManagerAlbum = new GridLayoutManager(context, 2);
+        recyclerViewAlbum.setLayoutManager(layoutManagerAlbum);
+        albumAdapter = new AlbumAdapter(context);
+        recyclerViewAlbum.setAdapter(albumAdapter);
+
 
     }
 
 
-    private void loadArtists() {
-        artistArrayList = new ArrayList<>();
-        mCompositeDisposable.add(Observable.fromCallable(() -> getDBAccessHelper().getAllArtist())
+    private void loadAlbums() {
+        albumArrayList = new ArrayList<>();
+        mCompositeDisposable.add(Observable.fromCallable(() -> DataHelper.getAlbumsList(context))
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<ArrayList<Artist>>() {
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<ArrayList<Album>>() {
                     @Override
-                    public void onNext(ArrayList<Artist> hashMaps) {
-                        artistArrayList = hashMaps;
-                        artistAdapter.addArtist(artistArrayList);
-                        Log.e(TAG, "onNextSize: " + hashMaps.size());
-
+                    public void onNext(ArrayList<Album> data) {
+                        Log.e(TAG, "Album size: " + data.size());
+                        albumArrayList = data;
+                        albumAdapter.addAlbums(data);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e(TAG, "onError: " + e.toString());
+                        Log.d("FAILED", "" + e.getMessage());
+                        Log.e(TAG, "Album FAILED: " + e.getMessage());
 
                     }
 
@@ -145,12 +149,6 @@ public class ArtistFragment extends Fragment {
                     public void onComplete() {
 
                     }
-                })
-        );
+                }));
     }
-
-    public DataBaseHelper getDBAccessHelper() {
-        return DataBaseHelper.getDatabaseHelper(context);
-    }
-
 }

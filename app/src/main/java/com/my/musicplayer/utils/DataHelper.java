@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import com.my.musicplayer.App;
+import com.my.musicplayer.model.Album;
 import com.my.musicplayer.model.Song;
 
 import java.io.File;
@@ -120,6 +121,45 @@ public class DataHelper {
         Log.e("DataHelper", "Songs: " + songs.toString());
         return songs;
     }
+
+    public static ArrayList<Album> getAlbumsList(Context context) {
+
+      //  String sort = PreferencesHelper.getInstance().getString(PreferencesHelper.Key.ALBUM_SORT_ORDER, SortOrder.AlbumSortOrder.ALBUM_DEFAULT)
+      //          + PreferencesHelper.getInstance().getString(PreferencesHelper.Key.ALBUM_SORT_TYPE, Constants.ASCENDING);
+        String sort = SortMediaStore.AlbumSortOrder.ALBUM_DEFAULT;
+
+
+        String[] columns = {
+                MediaStore.Audio.Albums._ID,
+                MediaStore.Audio.Albums.ALBUM,
+                MediaStore.Audio.Albums.ARTIST,
+                MediaStore.Audio.Albums.ALBUM_ART
+        };
+        Cursor cursor = context.getContentResolver().query(
+                MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
+                columns,
+                null,
+                null,
+                sort);
+
+        ArrayList<Album> albums = new ArrayList<>();
+
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                Album album = new Album(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+                albums.add(album);
+            } while (cursor.moveToNext());
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+        return albums;
+
+    }
+
+
 /*
     public static Boolean buildMusicLibrary() {
 

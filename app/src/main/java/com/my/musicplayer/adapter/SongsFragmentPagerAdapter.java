@@ -2,13 +2,11 @@ package com.my.musicplayer.adapter;
 
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.my.musicplayer.fragment.AlbumFargment;
+import com.my.musicplayer.fragment.AlbumFragment;
 import com.my.musicplayer.fragment.AllSongsFragment;
 import com.my.musicplayer.fragment.ArtistFragment;
 import com.my.musicplayer.fragment.FolderFragment;
@@ -39,7 +37,7 @@ public class SongsFragmentPagerAdapter extends FragmentStatePagerAdapter {
             } else if (tab.equalsIgnoreCase("Playlists")) {
                 fragments.add(new PlaylistFragment());
             } else if (tab.equalsIgnoreCase("Albums")) {
-                fragments.add(new AlbumFargment());
+                fragments.add(new AlbumFragment());
             } else if (tab.equalsIgnoreCase("Artists")) {
                 fragments.add(new ArtistFragment());
             } else if (tab.equalsIgnoreCase("Genres")) {
